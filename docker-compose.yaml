@@ -1,0 +1,21 @@
+version: "3.8"
+
+networks:
+  brimove-network:
+    driver: bridge
+    name: brimove-network
+
+services:
+  postgresdb:
+    image: postgres:alpine
+    container_name: postgres_brimove
+    restart: always
+    ports:
+      - target: 5432
+        published: 5432
+        protocol: tcp
+        mode: host
+    networks:
+      - brimove-network
+    environment:
+      - POSTGRES_PASSWORD=root
